@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دردشة مع البوت</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .chat-box {
+            height: 300px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            padding-right: 10px;
+        }
+        .message {
+            margin-bottom: 10px;
+        }
+        .user-message {
+            text-align: right;
+            color: #0044cc;
+        }
+        .bot-message {
+            text-align: left;
+            color: #007f39;
+        }
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            width: 18%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007f39;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <!-- الرسائل ستظهر هنا -->
+        </div>
+        <input type="text" id="user-input" placeholder="اكتب هنا...">
+        <button onclick="sendMessage()">إرسال</button>
+    </div>
+
+    <script>
+        function sendMessage() {
+            var userInput = document.getElementById('user-input').value;
+            if (userInput.trim() === "") return;
+
+            // إضافة رسالة المستخدم
+            var chatBox = document.getElementById('chat-box');
+            var userMessage = document.createElement('div');
+            userMessage.classList.add('message', 'user-message');
+            userMessage.textContent = userInput;
+            chatBox.appendChild(userMessage);
+
+            // الرد من البوت
+            var botReply = getBotReply(userInput);
+            var botMessage = document.createElement('div');
+            botMessage.classList.add('message', 'bot-message');
+            botMessage.textContent = botReply;
+            chatBox.appendChild(botMessage);
+
+            // مسح المدخل
+            document.getElementById('user-input').value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function getBotReply(userInput) {
+            // هنا يمكنك إضافة ردود البوت بناءً على المدخلات
+            if (userInput.includes('مرحباً')) {
+                return 'مرحباً! كيف يمكنني مساعدتك؟';
+            } else if (userInput.includes('ما هو اسمك؟')) {
+                return 'أنا بوت الدردشة الخاص بك!';
+            } else {
+                return 'أنا هنا للمساعدة. هل يمكنك أن توضح أكثر؟';
+            }
+        }
+    </script>
+
+
+</body></html>
